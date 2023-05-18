@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from metadata import AnyMessage
 
 app = Flask(__name__)
 
@@ -7,7 +8,8 @@ app = Flask(__name__)
 def add_message():
     content = request.get_json()
     app.logger.info(content)
-    return jsonify(content)
+    message = AnyMessage(**content)
+    return jsonify(message.dict())
 
 
 if __name__ == '__main__':
