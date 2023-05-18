@@ -130,7 +130,6 @@ class Payment(BaseModel):
 
 class AnyMessage(BaseModel):
     date: float
-    bot: Bot
     chat: Chat
     user: User
     message: str
@@ -140,7 +139,7 @@ class AnyMessage(BaseModel):
     @validator("type_subscribe_event")
     def validate_type_subscribe_event(cls, value: str) -> str:
         if value != "any_message":
-            raise ValueError("Invalid value.")
+            raise ValueError("Incorrect input message.")
         return value
 
     @validator("date")
