@@ -1,3 +1,6 @@
 .idea
 venv
 .pytest_cache
+any_message.db
+any_message.csv
+errors.csv
