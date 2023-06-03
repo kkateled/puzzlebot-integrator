@@ -1,12 +1,12 @@
 import os.path
-
-from flask import Flask, request, jsonify
+from flask import request, jsonify
+from flask_api import FlaskAPI
 import csv
 from utils.metadata import AnyMessage
 from models.sql_any_message import any_message_table, engine
 from utils.converters import to_model
 
-app = Flask(__name__)
+app = FlaskAPI(__name__)
 
 
 @app.route('/post', methods=['POST'])

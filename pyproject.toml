@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "wooyaa-puzzlebot-integrator"
+version = "0.1.0"
+description = ""
+authors = ["katrin_texet <lediaevak2001@mail.ru>"]
+readme = "README.md"
+packages = [{include = "wooyaa_puzzlebot_integrator"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+flask-api = "^3.0.post1"
+flask = "^2.3.2"
+pydantic = "^1.10.8"
+sqlalchemy = "^2.0.15"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
