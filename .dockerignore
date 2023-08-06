@@ -1,0 +1,6 @@
+venv
+*.db
+tests
+Dockerfile
+.dockerignore
+.gitignore

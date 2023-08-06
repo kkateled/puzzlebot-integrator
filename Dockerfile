@@ -1,7 +1,19 @@
-FROM python:3.10
+FROM python:3.9-alpine
 
-WORKDIR /
+RUN pip install poetry==1.5.1
+
+WORKDIR /app
+
+COPY poetry.lock .
+
+COPY README.md .
+
+COPY pyproject.toml .
+
+RUN poetry config virtualenvs.create false
+
+RUN poetry install --no-root
 
 COPY . .
 
-CMD [ "python", "app" ]d
+CMD [ "poetry", "run", "main.py" ]
