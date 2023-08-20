@@ -1,3 +1,4 @@
+import logging
 import os
 from logging.config import fileConfig
 
@@ -15,11 +16,15 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-with open(".env") as env_file:
-    lines = env_file.read().splitlines()
-    for line in lines:
-        key, value = line.split('=')
-        os.environ[key] = value
+if os.path.isfile(".env"):
+    with open(".env") as env_file:
+        lines = env_file.read().splitlines()
+        for line in lines:
+            key, value = line.split('=')
+            os.environ[key] = value
+else:
+    logging.warning("Not found .env")
+
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 DB_USER = os.environ.get("DB_USER")
 DB_HOST = os.environ.get("DB_HOST")

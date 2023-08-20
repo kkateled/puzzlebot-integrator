@@ -1,11 +1,14 @@
+import logging
 import os
 
-
-with open(".env") as env_file:
-    lines = env_file.read().splitlines()
-    for line in lines:
-        key, value = line.split('=')
-        os.environ[key] = value
+if os.path.isfile(".env"):
+    with open(".env") as env_file:
+        lines = env_file.read().splitlines()
+        for line in lines:
+            key, value = line.split('=')
+            os.environ[key] = value
+else:
+    logging.warning("Not found .env")
 
 
 from fastapi import FastAPI
