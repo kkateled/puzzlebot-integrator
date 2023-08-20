@@ -4,3 +4,4 @@ venv
 any_message.db
 any_message.csv
 errors.csv
+.env

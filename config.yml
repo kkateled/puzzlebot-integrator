@@ -1,0 +1,8 @@
+database:
+  host: !ENV ${DB_HOST}
+  dbname: postgres
+  username: !ENV ${DB_USER}
+  password: !ENV ${DB_PASSWORD}
+  type: !ENV ${DB_TYPE}
+  port: 5432
+log_level: WARN

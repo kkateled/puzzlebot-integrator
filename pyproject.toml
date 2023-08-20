@@ -7,12 +7,15 @@ readme = "README.md"
 packages = [{include = "wooyaa_puzzlebot_integrator"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
-flask-api = "^3.0.post1"
-flask = "^2.3.2"
+python = "^3.10"
 pydantic = "^1.10.8"
-sqlalchemy = "^2.0.15"
-
+pyaml-env = "^1.2.1"
+sqlalchemy = "^2.0.19"
+fastapi = "^0.101.1"
+alembic = "^1.11.2"
+more-itertools = "^10.1.0"
+psycopg2-binary = "^2.9.7"
+uvicorn = "^0.23.2"
 
 [build-system]
 requires = ["poetry-core"]
