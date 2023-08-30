@@ -1,8 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-
-from ..config.global_config import GlobalConfig
+from api.config.global_config import GlobalConfig
 
 global_config = GlobalConfig()
 
@@ -14,7 +13,6 @@ def build_db_url() -> str:
 
 engine = create_engine(build_db_url())
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 

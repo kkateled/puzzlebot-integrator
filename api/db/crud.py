@@ -12,13 +12,18 @@ def get_all_any_message(db: Session, page: int = 1, limit: int = 10):
     )
 
 
-"""
-select * from any_message
-order by date
-offset 4
-limit 6
-"""
+def get_all_users(db: Session):
+    return (
+        db.query(models.UserAuthorization)
+        .order_by(models.UserAuthorization.id)
+        .all()
+    )
 
-"1 2 3 4 5 6 7 8 9 10"
-# offset = 0 limit = 2 -> "1 2"
-# offset = 4 limit = 2 -> "5 6"
+
+def get(db, identificator):
+    return (
+        db.query(models.UserAuthorization)
+        .where(models.UserAuthorization.identificator == identificator)
+        .order_by(models.UserAuthorization.id)
+        .first()
+    )

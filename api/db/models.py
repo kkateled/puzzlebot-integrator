@@ -22,3 +22,16 @@ class AnyMessage(Base):
     message = Column(String)
     type_subscribe_event = Column(String)
     name = Column(String)
+
+
+class UserAuthorization(Base):
+    __tablename__ = "user_authorization"
+
+    id = Column(Integer, primary_key=True, index=True)
+    identificator = Column(String)
+    password = Column(String)
+    user_type = Column(String)
+    access_token = Column(String)
+    refresh_token = Column(String)
+    enabled = Column(String)
+

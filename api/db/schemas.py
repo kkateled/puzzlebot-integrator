@@ -11,3 +11,21 @@ class AnyMessage(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserAuthorizationResponse(BaseModel):
+    id: int
+    identificator: str
+    user_type: str | None
+
+    class Config:
+        orm_mode = True
+
+
+class UserAuthorizationRequest(BaseModel):
+    identificator: str
+    password: str
+    user_type: str | None
+
+    class Config:
+        orm_mode = True

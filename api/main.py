@@ -13,11 +13,12 @@ else:
 
 from fastapi import FastAPI
 from api.config.global_config import GlobalConfig
-from api.routers import any_message
+from api.routers import any_message, user_authorization
 
 app = FastAPI()
 
 app.include_router(any_message.router, prefix="/api/v1")
+app.include_router(user_authorization.router)
 conf = GlobalConfig()
 
 

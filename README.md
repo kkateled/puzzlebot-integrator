@@ -1,7 +1,7 @@
 ### Начальная установка окружения
 
 ```commandline
-pip install poetry
+pip install poetry==1.6.1
 poetry install
 ```
 

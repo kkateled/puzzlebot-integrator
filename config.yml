@@ -6,3 +6,8 @@ database:
   type: !ENV ${DB_TYPE}
   port: 5432
 log_level: WARN
+security:
+  secret_key: !ENV ${SECRET_KEY}
+  algorithm: !ENV ${ALGORITHM}
+  refresh_token_ttl: !ENV ${REFRESH_TOKEN}
+  access_token_ttl: !ENV ${ACCESS_TOKEN}
