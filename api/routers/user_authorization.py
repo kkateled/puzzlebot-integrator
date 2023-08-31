@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, Security, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.orm import Session
-from api.auth import auth_handler
+from api.auth import auth_handler, get_session_user
 from api.db import get_db, crud, schemas
 from api.db.models import UserAuthorization
 
@@ -20,12 +20,7 @@ def all_users(
         db: Session = Depends(get_db),
         credentials: HTTPAuthorizationCredentials = Security(security)
 ):
-    access_token = credentials.credentials
-    if access_token is None:
-        return HTTPException(status_code=401, detail='Forbidden')
-    user = crud.get(db, identificator=auth_handler.decode_token(access_token))
-    if user is None:
-        return HTTPException(status_code=401, detail='User not found')
+    session_user = get_session_user(credentials, crud, db)
     return crud.get_all_users(db)
 
 
@@ -36,7 +31,8 @@ def signup(user_details: schemas.UserAuthorizationRequest, db: Session = Depends
     hashed_password = auth_handler.encode_password(user_details.password)
     user = UserAuthorization(identificator=user_details.identificator,
                              password=hashed_password,
-                             user_type=user_details.user_type)
+                             user_type=user_details.user_type,
+                             enabled=True)
     try:
         db.add(user)
     except Exception as error:

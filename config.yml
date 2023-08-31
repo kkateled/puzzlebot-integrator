@@ -1,13 +1,13 @@
 database:
   host: !ENV ${DB_HOST}
   dbname: postgres
-  username: !ENV ${DB_USER}
+  username: !ENV ${DB_USER:postgres}
   password: !ENV ${DB_PASSWORD}
-  type: !ENV ${DB_TYPE}
+  type: !ENV ${DB_TYPE:postgresql}
   port: 5432
 log_level: WARN
 security:
   secret_key: !ENV ${SECRET_KEY}
-  algorithm: !ENV ${ALGORITHM}
-  refresh_token_ttl: !ENV ${REFRESH_TOKEN}
-  access_token_ttl: !ENV ${ACCESS_TOKEN}
+  algorithm: !ENV ${ALGORITHM:HS256}
+  refresh_token_ttl: !ENV ${REFRESH_TOKEN:10}
+  access_token_ttl: !ENV ${ACCESS_TOKEN:1800}

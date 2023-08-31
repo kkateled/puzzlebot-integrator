@@ -3,6 +3,7 @@ services:
   db:
     image: postgres:latest
     restart: always
+    hostname: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -11,11 +12,22 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     networks:
-      - emesa
-
+      - wooyaa
+  wooyaa:
+    image: wooyaa:latest
+    restart: always
+    hostname: wooyaa
+    environment:
+      - DB_HOST=postgres
+      - SECRET_KEY=5186b2e7cf1b98254094c73830f0d86a
+      - DB_PASSWORD=postgres
+    ports:
+      - '8000:8000'
+    networks:
+      - wooyaa
 volumes:
   db:
     driver: local
 networks:
-  emesa:
+  wooyaa:
     driver: bridge

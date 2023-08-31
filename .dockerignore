@@ -4,3 +4,4 @@ tests
 Dockerfile
 .dockerignore
 .gitignore
+.env

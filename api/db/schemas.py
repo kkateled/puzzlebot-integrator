@@ -17,6 +17,7 @@ class UserAuthorizationResponse(BaseModel):
     id: int
     identificator: str
     user_type: str | None
+    enabled: bool
 
     class Config:
         orm_mode = True

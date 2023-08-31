@@ -70,10 +70,13 @@ class Auth:
 auth_handler = Auth()
 
 
-def get_session_user(credentials, curd, db):
+def get_session_user(credentials, crud, db):
     access_token = credentials.credentials
     if access_token is None:
         return HTTPException(status_code=401, detail='Forbidden')
     user = crud.get(db, identificator=auth_handler.decode_token(access_token))
     if user is None:
         return HTTPException(status_code=401, detail='User not found')
+    if user.enabled is False:
+        return HTTPException(status_code=401, detail='User not found')
+    return user
