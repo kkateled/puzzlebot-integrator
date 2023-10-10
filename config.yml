@@ -11,3 +11,5 @@ security:
   algorithm: !ENV ${ALGORITHM:HS256}
   refresh_token_ttl: !ENV ${REFRESH_TOKEN:10}
   access_token_ttl: !ENV ${ACCESS_TOKEN:1800}
+cors:
+  - "*"

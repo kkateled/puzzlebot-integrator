@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from api.db import models
+from api.db.models import AnyMessage
 
 
 def get_all_any_message(db: Session, page: int = 1, limit: int = 10):
@@ -27,3 +28,10 @@ def get(db, identificator):
         .order_by(models.UserAuthorization.id)
         .first()
     )
+
+
+def save_any_message(db: Session, message: AnyMessage):
+    with db as session:
+        session.add(message)
+        session.commit()
+        return session.get(AnyMessage, message.id)

@@ -19,7 +19,7 @@ depends_on: Union[str, Sequence[str], None] = None
 def upgrade() -> None:
     op.create_table(
         "any_message",
-        sa.Column("id", sa.String, primary_key=True, index=True),
+        sa.Column("id", sa.BigInteger, primary_key=True, index=True, autoincrement=True),
         sa.Column("user_id", sa.String, index=True),
         sa.Column("date", sa.String),
         sa.Column("chat_id", sa.String, index=True),

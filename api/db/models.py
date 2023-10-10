@@ -5,7 +5,7 @@ from api.db import Base
 class AnyMessage(Base):
     __tablename__ = "any_message"
 
-    id = Column(String, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     user_id = Column(String, index=True)
     date = Column(String)
     chat_id = Column(String, index=True)
@@ -27,7 +27,7 @@ class AnyMessage(Base):
 class UserAuthorization(Base):
     __tablename__ = "user_authorization"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     identificator = Column(String)
     password = Column(String)
     user_type = Column(String)

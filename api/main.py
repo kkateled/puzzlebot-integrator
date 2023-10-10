@@ -14,12 +14,22 @@ else:
 from fastapi import FastAPI
 from api.config.global_config import GlobalConfig
 from api.routers import any_message, user_authorization
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 app.include_router(any_message.router, prefix="/api/v1")
 app.include_router(user_authorization.router)
 conf = GlobalConfig()
+
+# origins = [
+#     conf.cors
+# ]
+#
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins
+# )
 
 
 @app.get("/health")

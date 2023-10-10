@@ -27,7 +27,7 @@ def all_users(
 @router.post('/sugnup')
 def signup(user_details: schemas.UserAuthorizationRequest, db: Session = Depends(get_db)):
     if crud.get(db, user_details.identificator) is not None:
-        return HTTPException(status_code=400, detail='Account already exists')
+        raise HTTPException(status_code=400, detail='Account already exists')
     hashed_password = auth_handler.encode_password(user_details.password)
     user = UserAuthorization(identificator=user_details.identificator,
                              password=hashed_password,
@@ -37,7 +37,7 @@ def signup(user_details: schemas.UserAuthorizationRequest, db: Session = Depends
         db.add(user)
     except Exception as error:
         logging.exception(error)
-        return HTTPException(status_code=500, detail='Failed to signup user')
+        raise HTTPException(status_code=500, detail='Failed to signup user')
     else:
         db.commit()
         return schemas.UserAuthorizationResponse.from_orm(user)
@@ -47,11 +47,11 @@ def signup(user_details: schemas.UserAuthorizationRequest, db: Session = Depends
 def login(user_details: schemas.UserAuthorizationRequest, db: Session = Depends(get_db)):
     user = crud.get(db, user_details.identificator)
     if user is None:
-        return HTTPException(status_code=401, detail='Invalid password or username')
+        raise HTTPException(status_code=401, detail='Invalid password or username')
     if not auth_handler.verify_password(user_details.password, user.password):
-        return HTTPException(status_code=401, detail='Invalid password or username')
+        raise HTTPException(status_code=401, detail='Invalid password or username')
     if user.access_token is not None or user.refresh_token is not None:
-        return HTTPException(status_code=401, detail='User already login')
+        raise HTTPException(status_code=401, detail='User already login')
     access_token = auth_handler.encode_token(user.identificator)
     refresh_token = auth_handler.encode_refresh_token(user.identificator)
     user.access_token = access_token
